@@ -130,7 +130,10 @@
         Und danach? Da lassen wir die Korken knallen und feiern zusammen bis die Sonne wieder
         aufgeht!
       </p>
-      <a href="https://maps.app.goo.gl/XdEUR7kXKkTqiYH27" class="p-3 bg-slate-500 text-white">
+      <a
+        href="https://maps.app.goo.gl/XdEUR7kXKkTqiYH27"
+        class="p-3 bg-slate-500 font-title text-white"
+      >
         Zeig mir den Weg
       </a>
     </div>
@@ -257,7 +260,7 @@
     {/if}
     <input
       type="submit"
-      class="col-span-4 col-start-5 md:col-span-2 md:col-start-6 bg-slate-500 text-white p-4"
+      class="col-span-4 font-title col-start-5 md:col-span-2 md:col-start-6 bg-slate-500 text-white p-3"
       value="Abschicken"
     />
   </form>
