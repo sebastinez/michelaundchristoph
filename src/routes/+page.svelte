@@ -257,7 +257,7 @@
     {/if}
     <input
       type="submit"
-      class="col-span-4 col-start-5 md:col-span-2 md:col-start-6 bg-slate-400 p-4"
+      class="col-span-4 col-start-5 md:col-span-2 md:col-start-6 bg-slate-500 text-white p-4"
       value="Abschicken"
     />
   </form>
