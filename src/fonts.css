@@ -1,0 +1,15 @@
+/* fonts.css */
+
+@font-face {
+  font-family: 'Pathfinder';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/pathfinder.otf'); /* IE9 Compat Modes */
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/quicksand.ttf'); /* IE9 Compat Modes */
+}

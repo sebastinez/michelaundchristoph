@@ -8,9 +8,12 @@ export default {
       lg: '976px',
       xl: '1440px'
     },
+    container: {
+      center: true
+    },
     fontFamily: {
-      sans: ['QuickSand', 'sans-serif'],
-      title: ['Pathfinder Demo']
+      sans: ['Quicksand', 'sans-serif'],
+      title: ['Pathfinder']
     },
     extend: {
       backgroundImage: {
