@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fly, slide } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
   import '../app.css';
   import '../fonts.css';
 
@@ -15,7 +15,7 @@
     }
   }
 
-  let teilnahme = true;
+  let teilnahme: boolean | undefined = undefined;
 </script>
 
 <style>
@@ -28,6 +28,43 @@
 <svelte:head>
   <title>Michela und Christoph</title>
   <meta name="description" content="Michela und Christoph Hochzeits Website" />
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8HlzT1L6ZXM47S5uQl-QBU9tbutGcy5Q&callback=initMap&libraries=&v=weekly"
+    defer
+  ></script>
+  <script>
+    'use strict';
+
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById('gmp-map'), {
+        zoom: 17,
+        center: {
+          lat: 47.37135227848034,
+          lng: 8.542397968314921
+        },
+        fullscreenControl: false,
+        zoomControl: true,
+        streetViewControl: false
+      });
+
+      new google.maps.Marker({
+        position: {
+          lat: 47.372514455141214,
+          lng: 8.54079452811307
+        },
+        map,
+        title: 'Lindenhofkeller'
+      });
+      new google.maps.Marker({
+        position: {
+          lat: 47.37013775039141,
+          lng: 8.54406074571337
+        },
+        map,
+        title: 'Hochzeit Locations'
+      });
+    }
+  </script>
 </svelte:head>
 
 <div class="xl:container xl:mx-auto">
@@ -114,6 +151,7 @@
       </p>
     </div>
   </section>
+  <div id="gmp-map" style:height="500px" />
 
   <section id="location" class="grid grid-cols-12 gap-6 px-3 py-10">
     <div class="col-span-full col-start-2 col-end-12 md:col-start-2 md:col-end-6 text-justify">
@@ -197,10 +235,10 @@
       <div class="flex flex-row gap-8">
         <div>
           <input
-            checked
             type="radio"
             name="teilnahme"
             on:click={() => (teilnahme = true)}
+            required
             value="yes"
             id="teilnahme_yes"
             class="border border-slate-600 p-2"
@@ -211,6 +249,7 @@
             type="radio"
             name="teilnahme"
             on:click={() => (teilnahme = false)}
+            required
             value="no"
             id="teilnahme_no"
             class="border border-slate-600 p-2"
