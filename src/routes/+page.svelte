@@ -31,9 +31,9 @@
 
 <header
   id="top"
-  class="w-screen h-168 bg-[url('/images/hero.jpg')] bg-cover bg-no-repeat bg-center flex flex-col justify-between"
+  class="w-screen h-155 bg-[url('/images/hero.jpg')] bg-cover bg-no-repeat bg-center flex flex-col justify-between"
 >
-  <nav class="flex flex-row justify-center gap-6 pt-6 text-xl font-title">
+  <nav class="flex flex-row justify-center gap-6 pt-6 text-3xl font-title">
     <a href="#story" on:click|preventDefault={handleAnchorClick}>Story</a>
     <a href="#location" on:click|preventDefault={handleAnchorClick}>Location</a>
     <a href="#anmeldung" on:click|preventDefault={handleAnchorClick}>Anmeldung</a>
@@ -42,7 +42,7 @@
     <h1 class="text-8xl pb-3 font-title stroke-black text-white drop-shadow-lg text-center">
       Michela & Christoph
     </h1>
-    <h2 class="text-3xl font-title text-white stroke-black text-center">17 August 2023</h2>
+    <h2 class="text-3xl text-white font-title text-center">17 August 2023</h2>
   </div>
 </header>
 
@@ -85,7 +85,11 @@
   </div>
 </section>
 
-<section id="location" class="w-full h-144 bg-teal-400 py-10 px-20 flex flex-row justify-between">
+<section
+  id="location"
+  style:background-color="#CEDDE0"
+  class="w-full h-144 py-10 px-20 flex flex-row justify-between"
+>
   <div class="hidden lg:block">
     <img src="/images/grossmuenster.jpg" alt="kissing with the sun setting" />
   </div>
@@ -113,10 +117,10 @@
       Bei diesem gemütlichen Beisammensein freuen wir uns auf einige herzliche Beiträge von den
       Trauzeugen und anderen lieben Gästen.
     </p>
-    <p class="pt-5 pb-4 font-thin">
+    <p class="pt-5 pb-4 mb-5 font-thin">
       Und danach? Da lassen wir die Korken knallen und feiern zusammen bis die Sonne wieder aufgeht!
     </p>
-    <a href="https://maps.app.goo.gl/XdEUR7kXKkTqiYH27" class="p-3 bg-slate-500">
+    <a href="https://maps.app.goo.gl/XdEUR7kXKkTqiYH27" class="p-3 bg-slate-500 text-white">
       Zeig mir den Weg
     </a>
   </div>
