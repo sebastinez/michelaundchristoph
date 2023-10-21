@@ -151,7 +151,7 @@
   />
 </section> -->
 
-  <h2 class="font-title text-4xl text-center px-3 py-10">Anmeldung</h2>
+  <h2 id="anmeldung" class="font-title text-4xl text-center px-3 py-10">Anmeldung</h2>
 
   <form method="POST" class="grid grid-cols-12 gap-6 px-3 mb-5">
     <div class="col-start-2 col-end-7">
