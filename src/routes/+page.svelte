@@ -1,7 +1,20 @@
+<script lang="ts" context="module">
+  import { env as publicEnv } from '$env/dynamic/public';
+
+  export const loader = new Loader({
+    apiKey: publicEnv.PUBLIC_GOOGLE_MAPS_API_KEY as string,
+    version: 'weekly',
+    libraries: ['maps', 'marker']
+  });
+</script>
+
 <script lang="ts">
   import { fly } from 'svelte/transition';
   import '../app.css';
   import '../fonts.css';
+  import { Loader } from '@googlemaps/js-api-loader';
+  import { onMount } from 'svelte';
+  import { enhance } from '$app/forms';
 
   function handleAnchorClick(event: any) {
     const link = event.currentTarget;
@@ -15,7 +28,62 @@
     }
   }
 
-  let teilnahme: boolean | undefined = undefined;
+  let submitBtn: HTMLInputElement | undefined = undefined;
+  let registered = false;
+  let teilnahme: boolean | undefined | unknown = undefined;
+
+  onMount(async () => {
+    const maps = await loader.importLibrary('maps');
+    const { PlacesService } = await loader.importLibrary('places');
+    const { Marker } = await loader.importLibrary('marker');
+
+    const mapElement = document.getElementById('gmp-map');
+
+    if (mapElement) {
+      const map = new maps.Map(mapElement, {
+        mapId: '26de143fa7cd1b2f',
+        zoom: 17,
+        center: {
+          lat: 47.37135227848034,
+          lng: 8.542397968314921
+        },
+        fullscreenControl: false,
+        zoomControl: true,
+        streetViewControl: false
+      });
+
+      const service = new PlacesService(map);
+
+      service.getDetails(
+        {
+          placeId: 'ChIJZWHfSaqgmkcREF9TlBQlGkk',
+          fields: ['name', 'formatted_address', 'place_id', 'geometry']
+        },
+        (place, status) => {
+          new google.maps.Marker({
+            map,
+            position: place?.geometry?.location,
+            icon: '/images/church.png',
+            title: 'Grossmünster'
+          });
+        }
+      );
+      service.getDetails(
+        {
+          placeId: 'ChIJr0M7RwcKkEcR58OcvIT2Gls',
+          fields: ['name', 'formatted_address', 'place_id', 'geometry']
+        },
+        (place, status) => {
+          new google.maps.Marker({
+            map,
+            position: place?.geometry?.location,
+            icon: '/images/apero.png',
+            title: 'Lindenhofkeller'
+          });
+        }
+      );
+    }
+  });
 </script>
 
 <style>
@@ -28,43 +96,6 @@
 <svelte:head>
   <title>Michela und Christoph</title>
   <meta name="description" content="Michela und Christoph Hochzeits Website" />
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8HlzT1L6ZXM47S5uQl-QBU9tbutGcy5Q&callback=initMap&libraries=&v=weekly"
-    defer
-  ></script>
-  <script>
-    'use strict';
-
-    function initMap() {
-      const map = new google.maps.Map(document.getElementById('gmp-map'), {
-        zoom: 17,
-        center: {
-          lat: 47.37135227848034,
-          lng: 8.542397968314921
-        },
-        fullscreenControl: false,
-        zoomControl: true,
-        streetViewControl: false
-      });
-
-      new google.maps.Marker({
-        position: {
-          lat: 47.372514455141214,
-          lng: 8.54079452811307
-        },
-        map,
-        title: 'Lindenhofkeller'
-      });
-      new google.maps.Marker({
-        position: {
-          lat: 47.37013775039141,
-          lng: 8.54406074571337
-        },
-        map,
-        title: 'Hochzeit Locations'
-      });
-    }
-  </script>
 </svelte:head>
 
 <div class="xl:container xl:mx-auto">
@@ -180,129 +211,151 @@
     </div>
   </section>
 
-  <!-- <section>
-  <iframe
-    title="Wegbeschreibung"
-    src="https://www.google.com/maps/d/embed?mid=1vDM7yWkS-Tw8KiKGg-68_GY5Znr8k6M&hl=en&ehbc=2E312F"
-    width="640"
-    height="480"
-  />
-</section> -->
-
-  <h2 id="anmeldung" class="font-title text-4xl text-center px-3 py-10">Anmeldung</h2>
-
-  <form method="POST" class="grid grid-cols-12 gap-6 px-3 mb-5">
-    <div class="col-start-2 col-end-7">
-      <label class="font-thin" for="vorname"
-        >Vorname<span aria-label="required" class="text-red-400">*</span></label
-      >
-      <input
-        required
-        type="text"
-        name="vorname"
-        id="vorname"
-        class="w-full border border-slate-600 p-2"
-      />
+  {#if registered}
+    <div class="text-center p-20">
+      <div class="text-3xl font-title">Vielen Dank für deine Anmeldung! 🥳</div>
+      {#if teilnahme === 'yes'}
+        <div class="pt-5">Wir freuen uns schon sehr auf deine/eure Teilnahme.</div>
+      {:else}
+        <div class="pt-5">Wir bedauern dass du nicht kommen kannst, danke fürs Bescheid sagen!</div>
+      {/if}
     </div>
-    <div class="col-start-7 col-end-12">
-      <label class="font-thin" for="nachname"
-        >Nachname<span aria-label="required" class="text-red-400">*</span></label
-      >
-      <input
-        required
-        type="text"
-        name="nachname"
-        id="nachname"
-        class="w-full border border-slate-600 p-2"
-      />
-    </div>
-    <div class="col-span-full col-start-2 col-end-12">
-      <label class="font-thin" for="mail"
-        >E-Mailaddresse<span aria-label="required" class="text-red-400">*</span></label
-      >
-      <input
-        required
-        type="email"
-        name="mail"
-        id="mail"
-        class="w-full border border-slate-600 p-2"
-      />
-    </div>
-    <div class="col-span-full col-start-2 col-end-12">
-      <label class="font-thin" for="mail"
-        >Teilnahme<span aria-label="required" class="text-red-400">*</span></label
-      >
-      <div class="flex flex-row gap-8">
-        <div>
-          <input
-            type="radio"
-            name="teilnahme"
-            on:click={() => (teilnahme = true)}
-            required
-            value="yes"
-            id="teilnahme_yes"
-            class="border border-slate-600 p-2"
-          /><label for="teilnahme_yes">Ja wir bestätigen</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            name="teilnahme"
-            on:click={() => (teilnahme = false)}
-            required
-            value="no"
-            id="teilnahme_no"
-            class="border border-slate-600 p-2"
-          /><label for="teilnahme_no">Nein wir können leider nicht</label>
-        </div>
-      </div>
-    </div>
-    {#if teilnahme}
-      <div class="col-span-full col-start-2 col-end-7" transition:fly>
-        <label class="font-thin" for="anzahl"
-          >Anzahl Gäste (inkl. Kinder)<span aria-label="required" class="text-red-400">*</span
-          ></label
+  {:else}
+    <h2 id="anmeldung" class="font-title text-4xl text-center px-3 py-10">Anmeldung</h2>
+    <form
+      method="POST"
+      use:enhance={({ formElement, formData, action, cancel }) => {
+        return async ({ result }) => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+          }
+          if (result.type === 'success') {
+            registered = true;
+            teilnahme = result?.data?.teilnahme;
+          }
+        };
+      }}
+      on:submit={() => {
+        if (submitBtn) {
+          submitBtn.disabled = true;
+        }
+      }}
+      class="grid grid-cols-12 gap-6 px-3 mb-5"
+    >
+      <div class="col-start-2 col-end-7">
+        <label class="font-thin" for="vorname"
+          >Vorname<span aria-label="required" class="text-red-400">*</span></label
         >
         <input
-          type="number"
           required
-          min={1}
-          name="anzahl"
-          id="anzahl"
+          type="text"
+          name="vorname"
+          id="vorname"
           class="w-full border border-slate-600 p-2"
         />
       </div>
-      <div class="col-span-full col-start-7 col-end-12" transition:fly>
-        <label class="font-thin" for="vegetarier"
-          >Wieviele davon vegetarisch?<span aria-label="required" class="text-red-400">*</span
-          ></label
+      <div class="col-start-7 col-end-12">
+        <label class="font-thin" for="nachname"
+          >Nachname<span aria-label="required" class="text-red-400">*</span></label
         >
         <input
-          type="number"
           required
-          name="vegetarier"
-          id="vegetarier"
+          type="text"
+          name="nachname"
+          id="nachname"
           class="w-full border border-slate-600 p-2"
         />
       </div>
-      <div class="col-span-full col-start-2 col-end-12" transition:fly>
-        <label class="font-thin" for="bemerkungen"
-          >Bemerkungen (Allergien, Unverträglichkeiten):</label
+      <div class="col-span-full col-start-2 col-end-12">
+        <label class="font-thin" for="mail"
+          >E-Mailaddresse<span aria-label="required" class="text-red-400">*</span></label
         >
-        <textarea
-          rows={5}
-          id="bemerkungen"
-          name="bemerkungen"
+        <input
+          required
+          type="email"
+          name="email"
+          id="email"
           class="w-full border border-slate-600 p-2"
         />
       </div>
-    {/if}
-    <input
-      type="submit"
-      class="col-span-4 font-title col-start-5 md:col-span-2 md:col-start-6 bg-slate-500 text-white p-3"
-      value="Abschicken"
-    />
-  </form>
+      <div class="col-span-full col-start-2 col-end-12">
+        <label class="font-thin" for="mail"
+          >Teilnahme<span aria-label="required" class="text-red-400">*</span></label
+        >
+        <div class="flex flex-row gap-8">
+          <div>
+            <input
+              type="radio"
+              name="teilnahme"
+              on:click={() => (teilnahme = true)}
+              required
+              value="yes"
+              id="teilnahme_yes"
+              class="border border-slate-600 p-2"
+            /><label for="teilnahme_yes">Ja wir bestätigen</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="teilnahme"
+              on:click={() => (teilnahme = false)}
+              required
+              value="no"
+              id="teilnahme_no"
+              class="border border-slate-600 p-2"
+            /><label for="teilnahme_no">Nein wir können leider nicht</label>
+          </div>
+        </div>
+      </div>
+      {#if teilnahme}
+        <div class="col-span-full col-start-2 col-end-7" transition:fly>
+          <label class="font-thin" for="anzahl_gaeste"
+            >Anzahl Gäste (inkl. Kinder)<span aria-label="required" class="text-red-400">*</span
+            ></label
+          >
+          <input
+            type="number"
+            required
+            min={1}
+            name="anzahl_gaeste"
+            id="anzahl_gaeste"
+            class="w-full border border-slate-600 p-2"
+          />
+        </div>
+        <div class="col-span-full col-start-7 col-end-12" transition:fly>
+          <label class="font-thin" for="anzahl_vegetarisch"
+            >Wieviele davon vegetarisch?<span aria-label="required" class="text-red-400">*</span
+            ></label
+          >
+          <input
+            type="number"
+            required
+            name="anzahl_vegetarisch"
+            id="anzahl_vegetarisch"
+            class="w-full border border-slate-600 p-2"
+          />
+        </div>
+        <div class="col-span-full col-start-2 col-end-12" transition:fly>
+          <label class="font-thin" for="bemerkungen"
+            >Bemerkungen (Allergien, Unverträglichkeiten):</label
+          >
+          <textarea
+            rows={5}
+            id="bemerkungen"
+            name="bemerkungen"
+            class="w-full border border-slate-600 p-2"
+          />
+        </div>
+      {/if}
+      <input
+        bind:this={submitBtn}
+        id="submitBtn"
+        type="submit"
+        class="col-span-4 font-title col-start-5 disabled:opacity-20 md:col-span-2 md:col-start-6 bg-slate-500 text-white p-3"
+        value="Abschicken"
+      />
+    </form>
+  {/if}
 
   <footer class="bg-slate-400 text-right py-3 px-3 mt-10">
     <a href="#top" on:click|preventDefault={handleAnchorClick}> nach oben </a>👆
