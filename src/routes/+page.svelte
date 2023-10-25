@@ -1,8 +1,8 @@
 <script lang="ts" context="module">
-  import { env as publicEnv } from '$env/dynamic/public';
+  import { env } from '$env/dynamic/public';
 
   export const loader = new Loader({
-    apiKey: publicEnv.PUBLIC_GOOGLE_MAPS_API_KEY as string,
+    apiKey: env.PUBLIC_GOOGLE_MAPS_API_KEY as string,
     version: 'weekly',
     libraries: ['maps', 'marker']
   });
