@@ -112,7 +112,7 @@
       <h1 class="text-8xl pb-3 font-title stroke-black text-white drop-shadow-lg text-center">
         Michela & Christoph
       </h1>
-      <h2 class="text-3xl text-white font-title text-center">17 August 2023</h2>
+      <h2 class="text-3xl text-white font-title text-center">17 August 2024</h2>
     </div>
   </header>
 
