@@ -1,6 +1,18 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 import { env } from '$env/dynamic/private';
+import nodemailer from 'nodemailer';
+import customFonts from 'custom-fonts-in-emails';
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: 'sebastinez87@gmail.com',
+    pass: env.GOOGLE_MAIL_APP_PASSWORD
+  }
+});
 
 /** @type {import('./$types').Actions} */
 export const actions = {
@@ -25,15 +37,90 @@ export const actions = {
     await doc.loadInfo();
     const sheet = doc.sheetsByTitle['Anmeldungen']; // or use `doc.sheetsById[id]` or `doc.sheetsByTitle[title]`
     await sheet.addRow({
-      vorname: data.get('vorname') || '',
-      nachname: data.get('nachname') || '',
-      email: data.get('email') || '',
-      teilnahme: data.get('teilnahme') || '',
-      anzahl_gaeste: data.get('anzahl_gaeste') || '',
-      anzahl_vegetarisch: data.get('anzahl_vegetarisch') || '',
-      bemerkungen: data.get('bemerkungen') || ''
+      vorname: data.get('vorname')?.toString() || '',
+      nachname: data.get('nachname')?.toString() || '',
+      email: data.get('email')?.toString() || '',
+      teilnahme: data.get('teilnahme')?.toString() || '',
+      anzahl_gaeste: data.get('anzahl_gaeste')?.toString() || '',
+      anzahl_vegetarisch: data.get('anzahl_vegetarisch')?.toString() || '',
+      bemerkungen: data.get('bemerkungen')?.toString() || ''
     });
     const teilnahme = data.get('teilnahme');
+
+    if (teilnahme === 'yes') {
+      const options = {
+        text: 'Hochzeit von Michela und Christoph',
+        fontNameOrPath: 'static/fonts/pathfinder.otf',
+        fontColor: '#FFF',
+        backgroundColor: 'transparent',
+        fontSize: 36
+      };
+
+      await transporter.sendMail({
+        from: '"Sebastian" <sebastinez87@gmail.com>',
+        to: data.get('email')?.toString(),
+        subject: 'Anmeldebestätigung für Hochzeit von Michela und Christoph',
+        html: `<!DOCTYPE html>
+      <html lang="en">
+
+      <head>
+          <meta charset="UTF-8">
+          <title>Hochzeit Michela und Christoph</title>
+          <style>
+              @font-face {
+                  font-family: "Pathfinder";
+                  font-style: normal;
+                  font-weight: 400;
+                  src: url("fonts/pathfinder.otf");
+              }
+
+              h2 {
+                  margin: 0;
+                  font-family: "Pathfinder";
+              }
+
+              main {
+                  width: 70vw;
+                  text-align: justify;
+                  margin: auto;
+                  padding: 2rem;
+                  background-color: rgb(206, 221, 224);
+              }
+          </style>
+      </head>
+
+      <body>
+          <main>
+              <h2>${await customFonts.png2x(options)}</h2>
+              <p>Lieber ${data.get('vorname')?.toString()}</p>
+              <p>wir möchten uns herzlich für deine Anmeldung zu unserer Hochzeitsfeier bedanken. Deine Anwesenheit wird
+                  diesen besonderen Tag für uns unvergesslich machen.</p>
+              <p>Hier sind die Details zur Hochzeitszeremonie und -apero:</p>
+              <ul>
+                  <li>Datum der Trauung: 17 April 2024</li>
+                  <li>Uhrzeit: 14:00</li>
+                  <li>Ort der Trauung: Grossmünster, Zürich</li>
+                  <li>Ort des Apero: Lindenhofkeller, Pfalzgasse 4, 8001 Zürich</li>
+                  <li>Anzahl Gäste: ${data.get('anzahl_gaeste')} davon vegetarisch ${data.get(
+          'anzahl_vegetarisch'
+        )}
+              </ul>
+              <p>Wir bitten dich, bis spätestens 13:30 Uhr am Ort der Trauung einzutreffen, um einen reibungslosen Beginn der
+                  Zeremonie zu gewährleisten.</p>
+
+              <p>Für Rückfragen und weitere Informationen bitte informiere dich auf <a
+                      href="https://michelaundchristoph.ch">www.michelaundchristoph.ch</a>. Wir freuen uns sehr darauf, diesen
+                  feierlichen Tag gemeinsam mit Ihnen zu erleben.</p>
+
+              <strong>
+                  <p>Mit herzlichen Grüßen,<br />Michela und Christoph</p>
+              </strong>
+          </main>
+      </body>
+
+      </html>`
+      });
+    }
 
     return { teilnahme: teilnahme || 'no' };
   }

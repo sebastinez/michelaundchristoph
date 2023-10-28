@@ -330,6 +330,7 @@
           <input
             type="number"
             required
+            min={0}
             name="anzahl_vegetarisch"
             id="anzahl_vegetarisch"
             class="w-full border border-slate-600 p-2"
