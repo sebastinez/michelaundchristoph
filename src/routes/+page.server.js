@@ -2,14 +2,13 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 import { env } from '$env/dynamic/private';
 import nodemailer from 'nodemailer';
-import customFonts from 'custom-fonts-in-emails';
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
+  host: 'asmtp.mail.hostpoint.ch',
+  port: 25,
+  secure: false,
   auth: {
-    user: 'sebastinez87@gmail.com',
+    user: 'trauzeugen@gmail.com',
     pass: env.GOOGLE_MAIL_APP_PASSWORD
   }
 });
@@ -48,14 +47,6 @@ export const actions = {
     const teilnahme = data.get('teilnahme');
 
     if (teilnahme === 'yes') {
-      const options = {
-        text: 'Hochzeit von Michela und Christoph',
-        fontNameOrPath: 'static/fonts/pathfinder.otf',
-        fontColor: '#FFF',
-        backgroundColor: 'transparent',
-        fontSize: 36
-      };
-
       await transporter.sendMail({
         from: '"Sebastian" <sebastinez87@gmail.com>',
         to: data.get('email')?.toString(),
@@ -76,7 +67,7 @@ export const actions = {
 
               h2 {
                   margin: 0;
-                  font-family: "Pathfinder";
+                  font-family: "Helvetica";
               }
 
               main {
@@ -91,7 +82,7 @@ export const actions = {
 
       <body>
           <main>
-              <h2>${await customFonts.png2x(options)}</h2>
+              <h2>Hochzeit von Michela und Christoph</h2>
               <p>Lieber ${data.get('vorname')?.toString()}</p>
               <p>wir möchten uns herzlich für deine Anmeldung zu unserer Hochzeitsfeier bedanken. Deine Anwesenheit wird
                   diesen besonderen Tag für uns unvergesslich machen.</p>

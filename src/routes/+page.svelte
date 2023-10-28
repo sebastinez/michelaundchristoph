@@ -142,7 +142,7 @@
     <div class="col-span-full col-start-2 col-end-12 md:col-start-2 md:col-end-6 text-justify">
       <h2 class="font-title text-4xl">14:00 - Grossmünster</h2>
       <p class="pt-5 font-thin">
-        Treffpunkt für alle geladenen Gäste ist um 13:00 Uhr vor dem majestätischen Großmünster, um
+        Treffpunkt für alle geladenen Gäste ist um 13:30 Uhr vor dem majestätischen Großmünster, um
         gemeinsam die bevorstehende kirchliche Trauung zu feiern.
       </p>
       <p class="pt-5 font-thin">
@@ -184,7 +184,7 @@
   </section>
   <div id="gmp-map" style:height="500px" />
 
-  <section id="location" class="grid grid-cols-12 gap-6 px-3 py-10">
+  <!-- <section id="location" class="grid grid-cols-12 gap-6 px-3 py-10">
     <div class="col-span-full col-start-2 col-end-12 md:col-start-2 md:col-end-6 text-justify">
       <h2 class="font-title text-4xl">18:00 - BellaVista</h2>
       <p class="pt-5 font-thin">
@@ -209,7 +209,7 @@
     <div class="hidden md:block col-span-full col-start-2 col-end-11 md:col-start-7 md:col-end-12">
       <img src="/images/bellavista.png" alt="kissing with the sun setting" />
     </div>
-  </section>
+  </section> -->
 
   {#if registered}
     <div class="text-center p-20">
