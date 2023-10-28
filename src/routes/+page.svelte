@@ -142,8 +142,8 @@
     <div class="col-span-full col-start-2 col-end-12 md:col-start-2 md:col-end-6 text-justify">
       <h2 class="font-title text-4xl">14:00 - Grossmünster</h2>
       <p class="pt-5 font-thin">
-        Treffpunkt für alle geladenen Gäste ist um 13:30 Uhr vor dem majestätischen Großmünster, um
-        gemeinsam die bevorstehende kirchliche Trauung um 14:00 Uhr zu feiern.
+        Treffpunkt für alle geladenen Gäste ist um 13:00 Uhr vor dem majestätischen Großmünster, um
+        gemeinsam die bevorstehende kirchliche Trauung zu feiern.
       </p>
       <p class="pt-5 font-thin">
         Ihr seid herzlich eingeladen, an dieser besonderen Zeremonie teilzunehmen, die von
