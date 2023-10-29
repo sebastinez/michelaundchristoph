@@ -5,10 +5,10 @@ import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
   host: 'asmtp.mail.hostpoint.ch',
-  port: 25,
-  secure: false,
+  port: 465,
+  secure: true,
   auth: {
-    user: 'trauzeugen@gmail.com',
+    user: 'trauzeugen@michelaundchristoph.ch',
     pass: env.GOOGLE_MAIL_APP_PASSWORD
   }
 });
@@ -48,7 +48,7 @@ export const actions = {
 
     if (teilnahme === 'yes') {
       await transporter.sendMail({
-        from: '"Sebastian" <sebastinez87@gmail.com>',
+        from: '"Hochzeit Michela und Christoph" <trauzeugen@michelaundchristoph.ch>',
         to: data.get('email')?.toString(),
         subject: 'Anmeldebestätigung für Hochzeit von Michela und Christoph',
         html: `<!DOCTYPE html>
