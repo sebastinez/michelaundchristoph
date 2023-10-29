@@ -9,12 +9,13 @@
 </script>
 
 <script lang="ts">
-  import { fly } from 'svelte/transition';
   import '../app.css';
   import '../fonts.css';
   import { Loader } from '@googlemaps/js-api-loader';
-  import { onMount } from 'svelte';
   import { enhance } from '$app/forms';
+  import { fly } from 'svelte/transition';
+  import { onMount } from 'svelte';
+  import { page } from '$app/stores';
 
   function handleAnchorClick(event: any) {
     const link = event.currentTarget;
@@ -29,13 +30,11 @@
   }
 
   let submitBtn: HTMLInputElement | undefined = undefined;
-  let registered = false;
-  let teilnahme: boolean | undefined | unknown = undefined;
+  let teilnahme: boolean | undefined = undefined;
 
   onMount(async () => {
     const maps = await loader.importLibrary('maps');
     const { PlacesService } = await loader.importLibrary('places');
-    const { Marker } = await loader.importLibrary('marker');
 
     const mapElement = document.getElementById('gmp-map');
 
@@ -59,7 +58,7 @@
           placeId: 'ChIJZWHfSaqgmkcREF9TlBQlGkk',
           fields: ['name', 'formatted_address', 'place_id', 'geometry']
         },
-        (place, status) => {
+        (place) => {
           new google.maps.Marker({
             map,
             position: place?.geometry?.location,
@@ -73,7 +72,7 @@
           placeId: 'ChIJr0M7RwcKkEcR58OcvIT2Gls',
           fields: ['name', 'formatted_address', 'place_id', 'geometry']
         },
-        (place, status) => {
+        (place) => {
           new google.maps.Marker({
             map,
             position: place?.geometry?.location,
@@ -184,61 +183,36 @@
   </section>
   <div id="gmp-map" style:height="500px" />
 
-  <!-- <section id="location" class="grid grid-cols-12 gap-6 px-3 py-10">
-    <div class="col-span-full col-start-2 col-end-12 md:col-start-2 md:col-end-6 text-justify">
-      <h2 class="font-title text-4xl">18:00 - BellaVista</h2>
-      <p class="pt-5 font-thin">
-        Um 18:00 Uhr geht's dann für den engeren Kreis mit einem feinen Abendessen im Bellavista am
-        Hönggerberg weiter.
-      </p>
-      <p class="pt-5 font-thin">
-        Bei diesem gemütlichen Beisammensein freuen wir uns auf einige herzliche Beiträge von den
-        Trauzeugen und anderen lieben Gästen.
-      </p>
-      <p class="pt-5 pb-4 mb-5 font-thin">
-        Und danach? Da lassen wir die Korken knallen und feiern zusammen bis die Sonne wieder
-        aufgeht!
-      </p>
-      <a
-        href="https://maps.app.goo.gl/XdEUR7kXKkTqiYH27"
-        class="p-3 bg-slate-500 font-title text-white"
-      >
-        Zeig mir den Weg
-      </a>
-    </div>
-    <div class="hidden md:block col-span-full col-start-2 col-end-11 md:col-start-7 md:col-end-12">
-      <img src="/images/bellavista.png" alt="kissing with the sun setting" />
-    </div>
-  </section> -->
-
-  {#if registered}
+  {#if $page.form?.success === 'true'}
     <div class="text-center p-20">
       <div class="text-3xl font-title">Vielen Dank für deine Anmeldung! 🥳</div>
-      {#if teilnahme === 'yes'}
+      {#if $page.form.teilnahme === 'yes'}
         <div class="pt-5">Wir freuen uns schon sehr auf deine/eure Teilnahme.</div>
       {:else}
-        <div class="pt-5">Wir bedauern dass du nicht kommen kannst, danke fürs Bescheid sagen!</div>
+        <div class="pt-5 w-max-96">
+          Wir bedauern dass du nicht kommen kannst, danke fürs Bescheid sagen!
+        </div>
       {/if}
+    </div>
+  {:else if $page.form?.success === 'false'}
+    <div class="text-center p-20">
+      <div class="text-3xl font-title">
+        Wir haben leider ein Problem mit deiner Anmeldung festgestellt 😟
+      </div>
+      <div class="pt-5">{$page.form.error}</div>
     </div>
   {:else}
     <h2 id="anmeldung" class="font-title text-4xl text-center px-3 py-10">Anmeldung</h2>
     <form
       method="POST"
-      use:enhance={({ formElement, formData, action, cancel }) => {
-        return async ({ result }) => {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-          }
-          if (result.type === 'success') {
-            registered = true;
-            teilnahme = result?.data?.teilnahme;
-          }
+      use:enhance={() => {
+        return async ({ update }) => {
+          if (submitBtn) submitBtn.disabled = false;
+          update();
         };
       }}
       on:submit={() => {
-        if (submitBtn) {
-          submitBtn.disabled = true;
-        }
+        if (submitBtn) submitBtn.disabled = true;
       }}
       class="grid grid-cols-12 gap-6 px-3 mb-5"
     >
@@ -316,7 +290,7 @@
           <input
             type="number"
             required
-            min={1}
+            min={0}
             name="anzahl_gaeste"
             id="anzahl_gaeste"
             class="w-full border border-slate-600 p-2"
@@ -329,7 +303,6 @@
           >
           <input
             type="number"
-            required
             min={0}
             name="anzahl_vegetarisch"
             id="anzahl_vegetarisch"
@@ -352,7 +325,7 @@
         bind:this={submitBtn}
         id="submitBtn"
         type="submit"
-        class="col-span-4 font-title col-start-5 disabled:opacity-20 md:col-span-2 md:col-start-6 bg-slate-500 text-white p-3"
+        class="col-span-4 font-title col-start-5 disabled:cursor-not-allowed disabled:opacity-20 md:col-span-2 md:col-start-6 bg-slate-500 text-white p-3"
         value="Abschicken"
       />
     </form>
