@@ -139,9 +139,9 @@
 
   <section id="location" class="grid grid-cols-12 py-10 px-3 gap-6">
     <div class="col-span-full col-start-2 col-end-12 md:col-start-2 md:col-end-6 text-justify">
-      <h2 class="font-title text-4xl">14:00 - Grossmünster</h2>
+      <h2 class="font-title text-4xl">13:00 - Grossmünster</h2>
       <p class="pt-5 font-thin">
-        Treffpunkt für alle geladenen Gäste ist um 13:30 Uhr vor dem majestätischen Großmünster, um
+        Treffpunkt für alle geladenen Gäste ist um 12:30 Uhr vor dem majestätischen Großmünster, um
         gemeinsam die bevorstehende kirchliche Trauung zu feiern.
       </p>
       <p class="pt-5 font-thin">
@@ -170,10 +170,10 @@
     <div
       class="col-span-full col-start-2 col-end-12 md:col-span-5 md:col-start-7 md:col-end-12 text-justify"
     >
-      <h2 class="font-title text-4xl">16:00 - Lindenhofkeller</h2>
+      <h2 class="font-title text-4xl">14:30 - Lindenhofkeller</h2>
       <p class="pt-5 font-thin">
-        Um 15:00 Uhr geht's dann mit einem gemütlichen Apéro weiter, wo wir gemeinsam anstoßen und
-        die schönen Momente der Trauung Revue passieren lassen können.
+        Es geht dann mit einem gemütlichen Apéro weiter, wo wir gemeinsam anstoßen und die schönen
+        Momente der Trauung Revue passieren lassen können.
       </p>
       <p class="pt-5 font-thin">
         Es wird sicherlich eine entspannte und fröhliche Runde, in der wir bei guten Gesprächen und

@@ -37,12 +37,12 @@ export const mailTemplate = (name: string, anzahl: string, vegetarisch: string) 
               <p>Hier sind die Details zur Hochzeitszeremonie und -apero:</p>
               <ul>
                   <li>Datum der Trauung: 17 April 2024</li>
-                  <li>Uhrzeit: 14:00</li>
+                  <li>Uhrzeit: 13:00</li>
                   <li>Ort der Trauung: Grossmünster, Zürich</li>
                   <li>Ort des Apero: Lindenhofkeller, Pfalzgasse 4, 8001 Zürich</li>
                   <li>Anzahl Gäste: ${anzahl} davon vegetarisch ${vegetarisch}
               </ul>
-              <p>Wir bitten dich, bis spätestens 13:30 Uhr am Ort der Trauung einzutreffen, um einen reibungslosen Beginn der
+              <p>Wir bitten dich, bis spätestens 12:30 Uhr am Ort der Trauung einzutreffen, um einen reibungslosen Beginn der
                   Zeremonie zu gewährleisten.</p>
 
               <p>Für Rückfragen und weitere Informationen bitte informiere dich auf <a
