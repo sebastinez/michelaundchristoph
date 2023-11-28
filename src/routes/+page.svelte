@@ -108,42 +108,34 @@
       <a href="#anmeldung" on:click|preventDefault={handleAnchorClick}>Anmeldung</a>
     </nav>
     <div class="pb-6">
-      <h1 class="text-8xl pb-3 font-title stroke-black text-white drop-shadow-lg text-center">
-        Michela & Christoph
-      </h1>
-      <h2 class="text-3xl text-white font-title text-center">17 August 2024</h2>
+      <h1 class="text-8xl pb-3 font-title drop-shadow-lg text-center">Michela & Christoph</h1>
+      <h2 class="text-3xl font-title text-center">17 August 2024</h2>
     </div>
   </header>
 
   <section id="story" class="grid grid-cols-12 py-10 px-3 gap-6">
-    <h2 class="col-span-full font-title text-center text-4xl">Unsere Story</h2>
-    <div class="col-span-full col-start-2 col-end-12 text-justify">
-      <p class=" pt-5 font-thin">
-        In einer kleinen Stadt trafen Christoph und Michela durch eine Arbeitskollegin von Michela
-        aufeinander. Christoph, der kreative Ingenieur mit einer Vorliebe für Hip-Hop, war von
-        Michelas sanfter Natur und ihrer Liebe zur Natur und den Pferden angetan. Die Chemie
-        zwischen ihnen war unbestreitbar.
-      </p>
-      <p class="py-5 font-thin">
-        Ihre Verabredungen bestanden aus rhythmischen Tanzabenden und ruhigen Spaziergängen durch
-        blühende Gärten. Trotz ihrer unterschiedlichen Interessen fanden sie einen gemeinsamen
-        Rhythmus des Herzens. Nun, mit festen Plänen, freuen sie sich darauf, nächstes Jahr den Bund
-        fürs Leben zu schließen und ihre einzigartige Melodie der Liebe zu einer lebenslangen
-        Harmonie zu weben.
-      </p>
+    <div class="col-span-full font-title text-center text-3xl col-start-2 col-end-12">
+      Wir freuen uns den Bund des Lebens mit Euch allen zu feiern!
     </div>
-    <div class="col-span-full col-start-2 col-end-12">
-      <img src="/images/story.jpg" alt="kissing with the sun setting" />
+  </section>
+
+  <section
+    id="location"
+    style:background-color="#CEDDE0"
+    class="grid grid-cols-12 gap-6 px-3 py-10"
+  >
+    <div class="col-span-full col-start-2 col-end-12 text-justify">
+      <h2 class="font-title text-4xl">12:30 - Besammlung</h2>
+      <p class="pt-5 font-thin">
+        Treffpunkt für alle geladenen Gäste vor dem majestätischen Großmünster, um gemeinsam die
+        bevorstehende kirchliche Trauung zu feiern.
+      </p>
     </div>
   </section>
 
   <section id="location" class="grid grid-cols-12 py-10 px-3 gap-6">
     <div class="col-span-full col-start-2 col-end-12 md:col-start-2 md:col-end-6 text-justify">
-      <h2 class="font-title text-4xl">13:00 - Grossmünster</h2>
-      <p class="pt-5 font-thin">
-        Treffpunkt für alle geladenen Gäste ist um 12:30 Uhr vor dem majestätischen Großmünster, um
-        gemeinsam die bevorstehende kirchliche Trauung zu feiern.
-      </p>
+      <h2 class="font-title text-4xl">13:00 - Trauung</h2>
       <p class="pt-5 font-thin">
         Ihr seid herzlich eingeladen, an dieser besonderen Zeremonie teilzunehmen, die von
         wunderschöner Musik untermalt und durch das atemberaubende Ambiente des Großmünsters
@@ -170,7 +162,7 @@
     <div
       class="col-span-full col-start-2 col-end-12 md:col-span-5 md:col-start-7 md:col-end-12 text-justify"
     >
-      <h2 class="font-title text-4xl">14:30 - Lindenhofkeller</h2>
+      <h2 class="font-title text-4xl">14:30 - Apero</h2>
       <p class="pt-5 font-thin">
         Es geht dann mit einem gemütlichen Apéro weiter, wo wir gemeinsam anstoßen und die schönen
         Momente der Trauung Revue passieren lassen können.
