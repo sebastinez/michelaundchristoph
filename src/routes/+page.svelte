@@ -124,27 +124,18 @@
     style:background-color="#CEDDE0"
     class="grid grid-cols-12 gap-6 px-3 py-10"
   >
-    <div class="col-span-full col-start-2 col-end-12 text-justify">
+    <div class="col-span-full col-start-2 col-end-12 text-center">
       <h2 class="font-title text-4xl">12:30 - Besammlung</h2>
-      <p class="pt-5 font-thin">
-        Treffpunkt für alle geladenen Gäste vor dem majestätischen Großmünster, um gemeinsam die
-        bevorstehende kirchliche Trauung zu feiern.
-      </p>
+      <p class="pt-5 font-thin text-2xl">Besammlung aller Gäste vor dem Grossmünster</p>
     </div>
   </section>
 
   <section id="location" class="grid grid-cols-12 py-10 px-3 gap-6">
-    <div class="col-span-full col-start-2 col-end-12 md:col-start-2 md:col-end-6 text-justify">
+    <div
+      class="col-span-full col-start-2 col-end-12 md:col-start-2 md:col-end-6 text-center md:text-justify"
+    >
       <h2 class="font-title text-4xl">13:00 - Trauung</h2>
-      <p class="pt-5 font-thin">
-        Ihr seid herzlich eingeladen, an dieser besonderen Zeremonie teilzunehmen, die von
-        wunderschöner Musik untermalt und durch das atemberaubende Ambiente des Großmünsters
-        abgerundet wird.
-      </p>
-      <p class="pt-5 font-thin">
-        Es wird ein unvergesslicher Moment voller Liebe und Freude, den wir gerne mit euch allen
-        teilen möchten.
-      </p>
+      <p class="pt-10 font-thin text-2xl">Trauung im Grossmünster</p>
     </div>
     <div class="hidden md:block col-span-full col-start-2 col-end-11 md:col-start-7 md:col-end-12">
       <img src="/images/grossmuenster.jpg" alt="kissing with the sun setting" />
@@ -160,17 +151,10 @@
       <img src="/images/lindenhofkeller.png" alt="kissing with the sun setting" />
     </div>
     <div
-      class="col-span-full col-start-2 col-end-12 md:col-span-5 md:col-start-7 md:col-end-12 text-justify"
+      class="col-span-full col-start-2 col-end-12 md:col-span-5 md:col-start-7 md:col-end-12 text-center md:text-justify"
     >
       <h2 class="font-title text-4xl">14:30 - Apero</h2>
-      <p class="pt-5 font-thin">
-        Es geht dann mit einem gemütlichen Apéro weiter, wo wir gemeinsam anstoßen und die schönen
-        Momente der Trauung Revue passieren lassen können.
-      </p>
-      <p class="pt-5 font-thin">
-        Es wird sicherlich eine entspannte und fröhliche Runde, in der wir bei guten Gesprächen und
-        leckeren Getränken zusammen feiern können.
-      </p>
+      <p class="pt-10 font-thin text-2xl">Anstossen auf unsere Hochzeit im Lindenhofkeller.</p>
     </div>
   </section>
   <div id="gmp-map" style:height="500px" />
