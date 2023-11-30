@@ -170,13 +170,6 @@
         </div>
       {/if}
     </div>
-  {:else if $page.form?.success === 'false'}
-    <div class="text-center p-20">
-      <div class="text-3xl font-title">
-        Wir haben leider ein Problem mit deiner Anmeldung festgestellt 😟
-      </div>
-      <div class="pt-5">{$page.form.error}</div>
-    </div>
   {:else}
     <h2 id="anmeldung" class="font-title text-4xl text-center px-3 py-10">Anmeldung</h2>
     <form
@@ -190,124 +183,135 @@
       on:submit={() => {
         if (submitBtn) submitBtn.disabled = true;
       }}
-      class="grid grid-cols-12 gap-6 px-3 mb-5"
     >
-      <div class="col-start-2 col-end-7">
-        <label class="font-thin" for="vorname"
-          >Vorname<span aria-label="required" class="text-red-400">*</span></label
-        >
-        <input
-          required
-          type="text"
-          name="vorname"
-          id="vorname"
-          class="w-full border border-slate-600 p-2"
-        />
-      </div>
-      <div class="col-start-7 col-end-12">
-        <label class="font-thin" for="nachname"
-          >Nachname<span aria-label="required" class="text-red-400">*</span></label
-        >
-        <input
-          required
-          type="text"
-          name="nachname"
-          id="nachname"
-          class="w-full border border-slate-600 p-2"
-        />
-      </div>
-      <div class="col-span-full col-start-2 col-end-12">
-        <label class="font-thin" for="mail"
-          >E-Mailaddresse<span aria-label="required" class="text-red-400">*</span></label
-        >
-        <input
-          required
-          type="email"
-          name="email"
-          id="email"
-          class="w-full border border-slate-600 p-2"
-        />
-      </div>
-      <div class="col-span-full col-start-2 col-end-12">
-        <label class="font-thin" for="mail"
-          >Teilnahme<span aria-label="required" class="text-red-400">*</span></label
-        >
-        <div class="flex flex-row gap-8">
-          <div>
-            <input
-              type="radio"
-              name="teilnahme"
-              on:click={() => (teilnahme = true)}
-              required
-              value="yes"
-              id="teilnahme_yes"
-              class="border border-slate-600 p-2"
-            /><label for="teilnahme_yes">Ja wir bestätigen</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              name="teilnahme"
-              on:click={() => (teilnahme = false)}
-              required
-              value="no"
-              id="teilnahme_no"
-              class="border border-slate-600 p-2"
-            /><label for="teilnahme_no">Nein wir können leider nicht</label>
-          </div>
-        </div>
-      </div>
-      {#if teilnahme}
-        <div class="col-span-full col-start-2 col-end-7" transition:fly>
-          <label class="font-thin" for="anzahl_gaeste"
-            >Anzahl Gäste (inkl. Kinder)<span aria-label="required" class="text-red-400">*</span
-            ></label
+      <div class="grid grid-cols-12 gap-6 px-3 mb-5">
+        <div class="col-start-2 col-end-7">
+          <label class="font-thin" for="vorname"
+            >Vorname<span aria-label="required" class="text-red-400">*</span></label
           >
           <input
-            type="number"
             required
-            min={0}
-            name="anzahl_gaeste"
-            id="anzahl_gaeste"
+            type="text"
+            name="vorname"
+            id="vorname"
             class="w-full border border-slate-600 p-2"
           />
         </div>
-        <div class="col-span-full col-start-7 col-end-12" transition:fly>
-          <label class="font-thin" for="anzahl_vegetarisch"
-            >Wieviele davon vegetarisch?<span aria-label="required" class="text-red-400">*</span
-            ></label
+        <div class="col-start-7 col-end-12">
+          <label class="font-thin" for="nachname"
+            >Nachname<span aria-label="required" class="text-red-400">*</span></label
           >
           <input
-            type="number"
-            min={0}
-            name="anzahl_vegetarisch"
-            id="anzahl_vegetarisch"
+            required
+            type="text"
+            name="nachname"
+            id="nachname"
             class="w-full border border-slate-600 p-2"
           />
         </div>
-        <div class="col-span-full col-start-2 col-end-12" transition:fly>
-          <label class="font-thin" for="bemerkungen"
-            >Bemerkungen (Allergien, Unverträglichkeiten):</label
+        <div class="col-span-full col-start-2 col-end-12">
+          <label class="font-thin" for="mail"
+            >E-Mailaddresse<span aria-label="required" class="text-red-400">*</span></label
           >
-          <textarea
-            rows={5}
-            id="bemerkungen"
-            name="bemerkungen"
+          <input
+            required
+            type="email"
+            name="email"
+            id="email"
             class="w-full border border-slate-600 p-2"
           />
+        </div>
+        <div class="col-span-full col-start-2 col-end-12">
+          <label class="font-thin" for="mail"
+            >Teilnahme<span aria-label="required" class="text-red-400">*</span></label
+          >
+          <div class="flex flex-row gap-8">
+            <div>
+              <input
+                type="radio"
+                name="teilnahme"
+                on:click={() => (teilnahme = true)}
+                required
+                value="yes"
+                id="teilnahme_yes"
+                class="border border-slate-600 p-2"
+              /><label for="teilnahme_yes">Ja wir bestätigen</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="teilnahme"
+                on:click={() => (teilnahme = false)}
+                required
+                value="no"
+                id="teilnahme_no"
+                class="border border-slate-600 p-2"
+              /><label for="teilnahme_no">Nein wir können leider nicht</label>
+            </div>
+          </div>
+        </div>
+        {#if teilnahme}
+          <div class="col-span-full col-start-2 col-end-7" transition:fly>
+            <label class="font-thin" for="anzahl_gaeste"
+              >Anzahl Gäste (inkl. Kinder)<span aria-label="required" class="text-red-400">*</span
+              ></label
+            >
+            <input
+              type="number"
+              required
+              min={1}
+              name="anzahl_gaeste"
+              id="anzahl_gaeste"
+              class="w-full border border-slate-600 p-2"
+            />
+          </div>
+          <div class="col-span-full col-start-7 col-end-12" transition:fly>
+            <label class="font-thin" for="anzahl_vegetarisch"
+              >Wieviele davon vegetarisch?<span aria-label="required" class="text-red-400">*</span
+              ></label
+            >
+            <input
+              type="number"
+              min={0}
+              name="anzahl_vegetarisch"
+              id="anzahl_vegetarisch"
+              class="w-full border border-slate-600 p-2"
+            />
+          </div>
+          <div class="col-span-full col-start-2 col-end-12" transition:fly>
+            <label class="font-thin" for="bemerkungen"
+              >Bemerkungen (Allergien, Unverträglichkeiten):</label
+            >
+            <textarea
+              rows={5}
+              id="bemerkungen"
+              name="bemerkungen"
+              class="w-full border border-slate-600 p-2"
+            />
+          </div>
+        {/if}
+      </div>
+      <div class="text-center w-100 mb-5">
+        <div class="mx-auto">
+          <input
+            class="font-title cursor-pointer disabled:cursor-not-allowed disabled:opacity-20 bg-slate-500 text-white w-72 p-3"
+            bind:this={submitBtn}
+            id="submitBtn"
+            type="submit"
+            value="Abschicken"
+          />
+        </div>
+      </div>
+      {#if $page.form?.error}
+        <div class=" text-center bg-red-300 font-bold p-4">
+          Wir haben leider ein Problem mit deiner Anmeldung festgestellt. Bitte versuche es nochmals
+          <p class="pt-3">{$page.form.error}</p>
         </div>
       {/if}
-      <input
-        bind:this={submitBtn}
-        id="submitBtn"
-        type="submit"
-        class="col-span-4 font-title col-start-5 disabled:cursor-not-allowed disabled:opacity-20 md:col-span-2 md:col-start-6 bg-slate-500 text-white p-3"
-        value="Abschicken"
-      />
     </form>
   {/if}
 
-  <footer class="bg-slate-400 text-right py-3 px-3 mt-10">
+  <footer class="bg-slate-400 text-right py-3 px-3">
     <a href="#top" on:click|preventDefault={handleAnchorClick}> nach oben </a>👆
   </footer>
 </div>
