@@ -73,7 +73,7 @@ export const actions = {
         email,
         teilnahme,
         anzahl_gaeste,
-        anzahl_vegetarisch: anzahl_vegetarisch ?? 0,
+        anzahl_vegetarisch: anzahl_vegetarisch === '' ? 0 : anzahl_vegetarisch,
         bemerkungen
       });
     } catch (e) {
