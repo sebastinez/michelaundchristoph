@@ -36,7 +36,7 @@ export const mailTemplate = (name: string, anzahl: string, vegetarisch: string) 
                   diesen besonderen Tag für uns unvergesslich machen.</p>
               <p>Hier sind die Details zur Hochzeitszeremonie und -apero:</p>
               <ul>
-                  <li>Datum der Trauung: 17 April 2024</li>
+                  <li>Datum der Trauung: 17 August 2024</li>
                   <li>Uhrzeit: 13:00</li>
                   <li>Ort der Trauung: Grossmünster, Zürich</li>
                   <li>Ort des Apero: Lindenhofkeller, Pfalzgasse 4, 8001 Zürich</li>
