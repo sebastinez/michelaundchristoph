@@ -56,3 +56,48 @@ export const mailTemplate = (name: string, anzahl: string, vegetarisch: string) 
       </body>
 
       </html>`;
+
+export const geschenkTemplate = () =>
+  `<!DOCTYPE html>
+      <html lang="en">
+
+      <head>
+          <meta charset="UTF-8">
+          <title>Hochzeit Michela und Christoph</title>
+          <style>
+              @font-face {
+                  font-family: "Pathfinder";
+                  font-style: normal;
+                  font-weight: 400;
+                  src: url("fonts/pathfinder.otf");
+              }
+
+              h2 {
+                  margin: 0;
+                  font-family: "Helvetica";
+              }
+
+              main {
+                  width: 70vw;
+                  text-align: justify;
+                  margin: auto;
+                  padding: 2rem;
+                  background-color: rgb(206, 221, 224);
+              }
+          </style>
+      </head>
+
+      <body>
+          <main>
+              <h2>Hochzeitsgeschenk für Michela und Christoph</h2>
+              <p>Wir möchten uns herzlich für die Auswahl eines Hochzeitsgeschenkes bei dir bedanken.</p>
+              
+              <p>Im Anhang dieses Mails wirst du einen QR Einzahlungsschein finden denn du benutzen kannst um uns dein/euer Hochzeitgeschenk zu überweisen.</p>
+
+              <strong>
+                  <p>Mit herzlichen Grüßen,<br />Michela und Christoph</p>
+              </strong>
+          </main>
+      </body>
+
+      </html>`;

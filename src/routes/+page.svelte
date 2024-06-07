@@ -31,6 +31,8 @@
 
   let submitBtn: HTMLInputElement | undefined = undefined;
   let teilnahme: boolean | undefined = undefined;
+  let geschenk: string | undefined = undefined;
+  let geschenkBtn: HTMLInputElement | undefined = undefined;
 
   onMount(async () => {
     const maps = await loader.importLibrary('maps');
@@ -103,9 +105,21 @@
     class="flex flex-col justify-between px-3 pb-10 h-155 bg-[url('/images/hero.jpg')] bg-cover bg-no-repeat bg-center"
   >
     <nav class="flex flex-row justify-center gap-6 pt-6 text-2xl font-title">
-      <a href="#story" on:click|preventDefault={handleAnchorClick}>Story</a>
-      <a href="#location" on:click|preventDefault={handleAnchorClick}>Location</a>
-      <a href="#anmeldung" on:click|preventDefault={handleAnchorClick}>Anmeldung</a>
+      <a
+        class="hover:drop-shadow transition-all"
+        href="#location"
+        on:click|preventDefault={handleAnchorClick}>Location</a
+      >
+      <a
+        class="hover:drop-shadow transition-all"
+        href="#anmeldung"
+        on:click|preventDefault={handleAnchorClick}>Anmeldung</a
+      >
+      <a
+        class="hover:drop-shadow transition-all"
+        href="#geschenke"
+        on:click|preventDefault={handleAnchorClick}>Geschenke</a
+      >
     </nav>
     <div class="pb-6">
       <h1 class="text-8xl pb-3 font-title drop-shadow-lg text-center">Michela & Christoph</h1>
@@ -113,7 +127,7 @@
     </div>
   </header>
 
-  <section id="story" class="grid grid-cols-12 py-10 px-3 gap-6">
+  <section class="grid grid-cols-12 py-10 px-3 gap-6">
     <div class="col-span-full font-title text-center text-3xl col-start-2 col-end-12">
       Wir freuen uns den Bund des Lebens mit Euch allen zu feiern!
     </div>
@@ -173,6 +187,7 @@
   {:else}
     <h2 id="anmeldung" class="font-title text-4xl text-center px-3 py-10">Anmeldung</h2>
     <form
+      action="?/confirm"
       method="POST"
       use:enhance={() => {
         return async ({ update }) => {
@@ -194,7 +209,7 @@
             type="text"
             name="vorname"
             id="vorname"
-            class="w-full border border-slate-600 p-2"
+            class="focus:shadow-xl hover:shadow-xl transition-shadow w-full border border-slate-600 p-2"
           />
         </div>
         <div class="col-start-7 col-end-12">
@@ -206,7 +221,7 @@
             type="text"
             name="nachname"
             id="nachname"
-            class="w-full border border-slate-600 p-2"
+            class="focus:shadow-xl hover:shadow-xl transition-shadow w-full border border-slate-600 p-2"
           />
         </div>
         <div class="col-span-full col-start-2 col-end-12">
@@ -218,7 +233,7 @@
             type="email"
             name="email"
             id="email"
-            class="w-full border border-slate-600 p-2"
+            class="focus:shadow-xl hover:shadow-xl transition-shadow w-full border border-slate-600 p-2"
           />
         </div>
         <div class="col-span-full col-start-2 col-end-12">
@@ -234,7 +249,7 @@
                 required
                 value="yes"
                 id="teilnahme_yes"
-                class="border border-slate-600 p-2"
+                class="focus:shadow-xl hover:shadow-xl transition-shadow border border-slate-600 p-2"
               /><label for="teilnahme_yes">Ja wir bestätigen</label>
             </div>
             <div>
@@ -245,7 +260,7 @@
                 required
                 value="no"
                 id="teilnahme_no"
-                class="border border-slate-600 p-2"
+                class="focus:shadow-xl hover:shadow-xl transition-shadow border border-slate-600 p-2"
               /><label for="teilnahme_no">Nein wir können leider nicht</label>
             </div>
           </div>
@@ -262,7 +277,7 @@
               min={1}
               name="anzahl_gaeste"
               id="anzahl_gaeste"
-              class="w-full border border-slate-600 p-2"
+              class="focus:shadow-xl hover:shadow-xl transition-shadow w-full border border-slate-600 p-2"
             />
           </div>
           <div class="col-span-full col-start-7 col-end-12" transition:fly>
@@ -275,7 +290,7 @@
               min={0}
               name="anzahl_vegetarisch"
               id="anzahl_vegetarisch"
-              class="w-full border border-slate-600 p-2"
+              class="focus:shadow-xl hover:shadow-xl transition-shadow w-full border border-slate-600 p-2"
             />
           </div>
           <div class="col-span-full col-start-2 col-end-12" transition:fly>
@@ -286,7 +301,7 @@
               rows={5}
               id="bemerkungen"
               name="bemerkungen"
-              class="w-full border border-slate-600 p-2"
+              class="focus:shadow-xl hover:shadow-xl transition-shadow w-full border border-slate-600 p-2"
             />
           </div>
         {/if}
@@ -294,7 +309,7 @@
       <div class="text-center w-100 mb-5">
         <div class="mx-auto">
           <input
-            class="font-title cursor-pointer disabled:cursor-not-allowed disabled:opacity-20 bg-slate-500 text-white w-72 p-3"
+            class="hover:shadow-xl transition-shadow font-title cursor-pointer disabled:cursor-not-allowed disabled:opacity-20 bg-slate-500 text-white w-72 p-3"
             bind:this={submitBtn}
             id="submitBtn"
             type="submit"
@@ -310,6 +325,78 @@
       {/if}
     </form>
   {/if}
+
+  <div style:background-color="#CEDDE0">
+    <h2 id="geschenke" class="font-title text-4xl text-center px-3 pt-10">Geschenke</h2>
+  </div>
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <section
+    id="location"
+    style:background-color="#CEDDE0"
+    class="grid grid-cols-12 h-max gap-6 px-3 py-10"
+  >
+    {#if geschenk}
+      <form
+        action="?/gift"
+        class="col-start-2 col-end-12 md:col-start-4 md:col-end-10 text-center"
+        method="POST"
+        use:enhance={() => {
+          return async ({ update }) => {
+            if (geschenkBtn) geschenkBtn.disabled = false;
+            update();
+            geschenk = undefined;
+          };
+        }}
+        on:submit={() => {
+          if (geschenkBtn) geschenkBtn.disabled = true;
+        }}
+      >
+        <div>
+          <div class="font-bold">Vielen Dank für deine Auswahl!</div>
+          <div class="py-2">
+            Bitte hinterlasse eine E-Mailaddresse an die wir die notwendigen Daten schicken können
+          </div>
+          <input
+            required
+            type="email"
+            name="email"
+            id="email"
+            class="focus:shadow-xl hover:shadow-xl transition-shadow w-full border border-slate-600 p-2"
+          />
+          <input
+            class="my-3 hover:shadow-xl transition-shadow w-full font-title cursor-pointer disabled:cursor-not-allowed disabled:opacity-20 bg-slate-500 text-white md:w-72 p-3"
+            bind:this={geschenkBtn}
+            id="geschenkBtn"
+            type="submit"
+            value="Bestätigen"
+          />
+        </div>
+      </form>
+    {:else}
+      <div
+        class="hover:shadow-2xl transition-shadow border border-black cursor-pointer md:block col-start-2 col-end-5 md:col-start-4 md:col-end-6"
+        on:click={() => (geschenk = 'Flitterwochen')}
+      >
+        <img class="h-24 md:h-80" src="/images/flitterwochen.png" alt="couple in remote location" />
+        <h2 class="hidden md:block p-2">Flitterwochen</h2>
+      </div>
+      <div
+        class="hover:shadow-2xl transition-shadow border border-black cursor-pointer md:block col-start-5 col-end-9 md:col-start-6 md:col-end-8"
+        on:click={() => (geschenk = 'Sofa')}
+      >
+        <img class="mx-auto h-24 md:h-80" src="/images/sofa.png" alt="sofa" />
+        <h2 class="hidden md:block p-2">Sofa für das Wohnzimmer</h2>
+      </div>
+      <div
+        class="hover:shadow-2xl transition-shadow border border-black cursor-pointer md:block col-start-9 col-end-12 md:col-start-8 md:col-end-10"
+        on:click={() => (geschenk = 'Stühle')}
+      >
+        <img class="h-24 md:h-80" src="/images/chairs.png" alt="chair" />
+        <h2 class="hidden md:block p-2">Stühle</h2>
+      </div>
+    {/if}
+  </section>
 
   <footer class="bg-slate-400 text-right py-3 px-3">
     <a href="#top" on:click|preventDefault={handleAnchorClick}> nach oben </a>👆

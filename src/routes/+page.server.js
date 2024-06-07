@@ -1,9 +1,10 @@
 import nodemailer from 'nodemailer';
+import * as fs from 'node:fs';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 import { env } from '$env/dynamic/private';
 import { fail } from '@sveltejs/kit';
-import { mailTemplate } from '$lib/mail-template';
+import { geschenkTemplate, mailTemplate } from '$lib/mail-template';
 
 const transporter = nodemailer.createTransport({
   host: 'asmtp.mail.hostpoint.ch',
@@ -32,7 +33,7 @@ const doc = new GoogleSpreadsheet(
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-  default: async ({ request }) => {
+  confirm: async ({ request }) => {
     // Parse formData
     const formData = await request.formData();
     const formDataArray = Array.from(formData.entries()).map(([key, value]) => [
@@ -104,5 +105,39 @@ export const actions = {
     }
 
     return { success: 'true', teilnahme };
+  },
+  gift: async ({ request }) => {
+    const formData = await request.formData();
+    const formDataArray = Array.from(formData.entries()).map(([key, value]) => [
+      key,
+      value.toString()
+    ]);
+    const { email } = Object.fromEntries(formDataArray);
+
+    if (!email) {
+      return fail(400, { success: 'false', error: 'Es fehlt uns Ihre E-Mail addresse.' });
+    }
+
+    try {
+      await transporter.sendMail({
+        from: '"Hochzeit Michela und Christoph" <trauzeugen@michelaundchristoph.ch>',
+        to: email,
+        subject: 'Nützliche Informationen für Hochzeitsgeschenk für Michela und Christoph',
+        attachments: [
+          {
+            filename: 'QR-Rechnung.pdf',
+            content: fs.createReadStream('src/lib/pdf/qr-rechnung.pdf')
+          }
+        ],
+        html: geschenkTemplate()
+      });
+    } catch (e) {
+      console.error(e);
+      return fail(500, {
+        success: 'false',
+        error:
+          'Deine Daten wurden gespeichert, es gab aber leider ein Problem beim Versenden des Bestätigungsemails. Bitte wenden Sie sich an trauzeugen@michelaundchristoph.ch'
+      });
+    }
   }
 };
