@@ -139,7 +139,7 @@
     class="grid grid-cols-12 gap-6 px-3 py-10"
   >
     <div class="col-span-full col-start-2 col-end-12 text-center">
-      <h2 class="font-title text-4xl">12:30 - Besammlung</h2>
+      <h2 class="font-title text-4xl">13:30 - Besammlung</h2>
       <p class="pt-5 font-thin text-2xl">Besammlung aller Gäste vor dem Grossmünster</p>
     </div>
   </section>
@@ -148,7 +148,7 @@
     <div
       class="col-span-full col-start-2 col-end-12 md:col-start-2 md:col-end-6 text-center md:text-justify"
     >
-      <h2 class="font-title text-4xl">13:00 - Trauung</h2>
+      <h2 class="font-title text-4xl">14:00 - Trauung</h2>
       <p class="pt-10 font-thin text-2xl">Trauung im Grossmünster</p>
     </div>
     <div class="hidden md:block col-span-full col-start-2 col-end-11 md:col-start-7 md:col-end-12">
@@ -167,7 +167,7 @@
     <div
       class="col-span-full col-start-2 col-end-12 md:col-span-5 md:col-start-7 md:col-end-12 text-center md:text-justify"
     >
-      <h2 class="font-title text-4xl">14:30 - Apero</h2>
+      <h2 class="font-title text-4xl">15:30 - Apero</h2>
       <p class="pt-10 font-thin text-2xl">Anstossen auf unsere Hochzeit im Lindenhofkeller.</p>
     </div>
   </section>
