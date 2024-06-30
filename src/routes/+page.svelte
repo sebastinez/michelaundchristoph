@@ -328,6 +328,7 @@
 
   <div style:background-color="#CEDDE0">
     <h2 id="geschenke" class="font-title text-4xl text-center px-3 pt-10">Geschenke</h2>
+    <p class="pt-5 font-thin text-center text-2xl">Wir haben da ein paar Ideen...</p>
   </div>
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -336,27 +337,29 @@
     style:background-color="#CEDDE0"
     class="grid grid-cols-12 h-max gap-6 px-3 py-10"
   >
-    {#if geschenk}
-      <form
-        action="?/gift"
-        class="col-start-2 col-end-12 md:col-start-4 md:col-end-10 text-center"
-        method="POST"
-        use:enhance={() => {
-          return async ({ update }) => {
-            if (geschenkBtn) geschenkBtn.disabled = false;
-            update();
-            geschenk = undefined;
-          };
-        }}
-        on:submit={() => {
-          if (geschenkBtn) geschenkBtn.disabled = true;
-        }}
-      >
-        <div>
-          <div class="font-bold">Vielen Dank für deine Auswahl!</div>
-          <div class="py-2">
-            Bitte hinterlasse eine E-Mailaddresse an die wir die notwendigen Daten schicken können
-          </div>
+    <div class="col-span-full md:col-start-3 md:col-end-11">
+      <img src="/images/gifts.jpeg" alt="couple looking at sunset" />
+    </div>
+    <form
+      action="?/gift"
+      class="col-start-2 col-end-12 md:col-start-4 md:col-end-10 text-center"
+      method="POST"
+      use:enhance={() => {
+        return async ({ update }) => {
+          if (geschenkBtn) geschenkBtn.disabled = false;
+          update();
+          geschenk = undefined;
+        };
+      }}
+      on:submit={() => {
+        if (geschenkBtn) geschenkBtn.disabled = true;
+      }}
+    >
+      <div>
+        <div class="font-thin text-center text-xl pb-5">
+          Bitte hinterlasse eine E-Mailaddresse an die wir die notwendigen Daten schicken können
+        </div>
+        <div style="display: flex; gap: 1rem;">
           <input
             required
             type="email"
@@ -365,37 +368,15 @@
             class="focus:shadow-xl hover:shadow-xl transition-shadow w-full border border-slate-600 p-2"
           />
           <input
-            class="my-3 hover:shadow-xl transition-shadow w-full font-title cursor-pointer disabled:cursor-not-allowed disabled:opacity-20 bg-slate-500 text-white md:w-72 p-3"
+            class="hover:shadow-xl transition-shadow w-full font-title cursor-pointer disabled:cursor-not-allowed disabled:opacity-20 bg-slate-500 text-white md:w-72 p-3"
             bind:this={geschenkBtn}
             id="geschenkBtn"
             type="submit"
             value="Bestätigen"
           />
         </div>
-      </form>
-    {:else}
-      <div
-        class="hover:shadow-2xl transition-shadow border border-black cursor-pointer md:block col-start-2 col-end-5 md:col-start-4 md:col-end-6"
-        on:click={() => (geschenk = 'Flitterwochen')}
-      >
-        <img class="h-24 md:h-80" src="/images/flitterwochen.png" alt="couple in remote location" />
-        <h2 class="hidden md:block p-2">Flitterwochen</h2>
       </div>
-      <div
-        class="hover:shadow-2xl transition-shadow border border-black cursor-pointer md:block col-start-5 col-end-9 md:col-start-6 md:col-end-8"
-        on:click={() => (geschenk = 'Sofa')}
-      >
-        <img class="mx-auto h-24 md:h-80" src="/images/sofa.png" alt="sofa" />
-        <h2 class="hidden md:block p-2">Sofa für das Wohnzimmer</h2>
-      </div>
-      <div
-        class="hover:shadow-2xl transition-shadow border border-black cursor-pointer md:block col-start-9 col-end-12 md:col-start-8 md:col-end-10"
-        on:click={() => (geschenk = 'Stühle')}
-      >
-        <img class="h-24 md:h-80" src="/images/chairs.png" alt="chair" />
-        <h2 class="hidden md:block p-2">Stühle</h2>
-      </div>
-    {/if}
+    </form>
   </section>
 
   <footer class="bg-slate-400 text-right py-3 px-3">
