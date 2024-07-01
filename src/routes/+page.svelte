@@ -342,7 +342,7 @@
     </div>
     <form
       action="?/gift"
-      class="col-start-2 col-end-12 md:col-start-4 md:col-end-10 text-center"
+      class="col-start-2 col-end-12 md:col-start-3 md:col-end-11 text-center"
       method="POST"
       use:enhance={() => {
         return async ({ update }) => {
@@ -359,13 +359,13 @@
         <div class="font-thin text-center text-xl pb-5">
           Bitte hinterlasse eine E-Mailaddresse an die wir die notwendigen Daten schicken können
         </div>
-        <div style="display: flex; gap: 1rem;">
+        <div class="md:flex md:gap-1">
           <input
             required
             type="email"
             name="email"
             id="email"
-            class="focus:shadow-xl hover:shadow-xl transition-shadow w-full border border-slate-600 p-2"
+            class="focus:shadow-xl hover:shadow-xl transition-shadow w-full border border-slate-600 p-2 md:mb-0 mb-3"
           />
           <input
             class="hover:shadow-xl transition-shadow w-full font-title cursor-pointer disabled:cursor-not-allowed disabled:opacity-20 bg-slate-500 text-white md:w-72 p-3"

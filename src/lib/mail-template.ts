@@ -90,9 +90,9 @@ export const geschenkTemplate = () =>
       <body>
           <main>
               <h2>Hochzeitsgeschenk für Michela und Christoph</h2>
-              <p>Wir möchten uns herzlich bei dir für dass Interesse an einem Hochzeitsgeschenkes bedanken.</p>
+              <p>Besten Dank für das Ausfüllen des Geschenkfelds auf unserer Website!</p>
               
-              <p>Im Anhang dieses Mails wirst du einen QR Einzahlungsschein finden denn du benutzen kannst um uns dein/euer Hochzeitgeschenk zu überweisen.</p>
+              <p>Im Anhang dieser Mail findest Du einen QR Einzahlungsschein den Du benutzen kannst um uns Dein/Euer Hochzeitgeschenk zu überweisen.</p>
               <p><b>IBAN:</b> CH6708307000563431318<br/>
               <b>Kontoinhaber:</b> Christoph Gueng, Neunbrunnenstrasse 35, 8050 Zürich</p>
 
